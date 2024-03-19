@@ -50,7 +50,12 @@
         {
           "title": "Short",
           "name": "short",
-          "type": "string",
+          "type": "string"
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "type": "list"
         }
       ]
     }

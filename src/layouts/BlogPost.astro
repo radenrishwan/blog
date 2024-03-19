@@ -4,16 +4,20 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import Prose from "../components/articles/Prose.astro";
 import { Icon } from "astro-icon/components";
+import Image from "astro/components/Image.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage, author } =
+const { title, description, pubDate, updatedDate, heroImage, author, tags } =
 	Astro.props;
 
 const calendarIcon = "calendar";
 const hourglassIcon = "hourglass";
 const atIcon = "at";
+
+console.log(tags);
 
 const liClass = "flex flex-row items-center gap-2 text-sm font-extralight";
 ---
@@ -24,10 +28,8 @@ const liClass = "flex flex-row items-center gap-2 text-sm font-extralight";
 	</head>
 	<body>
 		<Header />
-		<main
-			class="container mx-auto flex flex-col items-center gap-10 px-[20vw] py-10"
-		>
-			<article class="flex flex-col gap-5">
+		<main class="container flex mx-auto items-center justify-center gap-10 py-10">
+			<article class="flex flex-col justify-center gap-5 w-[65vw]">
 				<p class="text-2xl font-semibold">{title}</p>
 				<ul class="flex flex-row gap-4">
 					<li class={liClass}>
@@ -44,7 +46,7 @@ const liClass = "flex flex-row items-center gap-2 text-sm font-extralight";
 					</li>
 					<li class={liClass}>
 						<Icon name={hourglassIcon} class="h-3 w-3 fill-white" />
-						3 Minutes time read
+						? Minutes time read
 					</li>
 				</ul>
 				<p class={liClass}>
@@ -53,25 +55,23 @@ const liClass = "flex flex-row items-center gap-2 text-sm font-extralight";
 				</p>
 				{
 					heroImage && (
-						<img
-							width={0}
-							height={0}
+						<Image
+							width={1}
+							height={1}
 							src={heroImage}
-							alt=""
+							alt={title}
 							class="h-auto w-full object-cover rounded-md"
 						/>
 					)
 				}
-				<div
-					class="prose dark:prose-invert prose-a:text-primary prose-p:text-justify prose-img:rounded-md prose-headings:underline max-w-none"
-				>
+				<Prose>
 					<slot />
-				</div>
+				</Prose>
 				<div class="flex flex-wrap gap-2">
 					{
-						[0, 1, 2, 3].map(() => (
-							<div class="text-sm font-extralight text-gray-300 hover:bg-primary hover:text-primary">
-								<p class="text-md">#Golang</p>
+						(tags ?? []).map((tag) => (
+							<div class="text-sm font-extralight text-gray-300">
+								<p class="text-md">#{tag}</p>
 							</div>
 						))
 					}

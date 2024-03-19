@@ -6,6 +6,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
+import FormattedDate from "../../components/FormattedDate.astro";
 
 const calendarIcon = "calendar";
 const hourglassICon = "hourglass";
@@ -21,7 +22,6 @@ const toElipsis = (text: string) => {
 		return text;
 	}
 };
-
 ---
 
 <!doctype html>
@@ -34,9 +34,9 @@ const toElipsis = (text: string) => {
 		<main>
 			<section
 				id="articles"
-				class="'container mx-auto flex flex-row items-center gap-10 px-[20vw] py-10"
+				class="'container flex mx-auto items-center justify-center gap-10 py-10"
 			>
-				<ul class="flex flex-col justify-center gap-5">
+				<ul class="flex flex-col justify-center gap-5 w-[65vw] ">
 					{
 						posts.map((post, index) => {
 							if (index == 0) {
@@ -44,38 +44,69 @@ const toElipsis = (text: string) => {
 							}
 
 							return (
-								<li class="flex cursor-pointer flex-col gap-5">
-									<p class="text-2xl font-semibold">
-										{post.data.title}
-									</p>
-									<Image
-										src={post.data.heroImage ?? 'https://placehold.co/600x400'}
-										height={1}
-										width={1}
-										loading="lazy"
-										class="h-auto w-full object-cover rounded-md"
-										alt={post.data.title}
-									/>
-									<p>
-										{toElipsis(post.data.short)}
-										<span class="underline">Read more</span>
-									</p>
-									<ul class="flex flex-row gap-4">
-										<li class="flex flex-row items-center gap-2 text-sm font-extralight">
-											<Icon
-												name={calendarIcon}
-												class="h-3 w-3 text-white"
-											/>
-											08 Jul 2023
-										</li>
-										<li class="flex flex-row items-center gap-2 text-sm font-extralight">
-											<Icon
-												name={hourglassICon}
-												class="h-3 w-3 text-white"
-											/>
-											3 Minutes time read
-										</li>
-									</ul>
+								<li>
+									<a
+										href={"articles/" + post.slug}
+										class="flex flex-col gap-5"
+									>
+										<p class="text-2xl font-semibold">
+											{post.data.title}
+										</p>
+										<Image
+											src={
+												post.data.heroImage == ""
+													? "https://placehold.co/600x400"
+													: post.data.heroImage!
+											}
+											height={1}
+											width={1}
+											loading="lazy"
+											class="h-auto w-full rounded-md"
+											alt={post.data.title}
+										/>
+										<div class="flex flex-wrap gap-2">
+											{(post.data.tags ?? []).map((tag) => (
+												<div class="text-sm font-extralight text-gray-300 ">
+													<p class="text-md">#{tag}</p>
+												</div>
+											))}
+										</div>
+										<p>
+											{toElipsis(post.data.short)}
+											<span class="underline">
+												Read more
+											</span>
+										</p>
+										<ul class="flex flex-row gap-4">
+											<li class="flex flex-row items-center gap-2 text-sm font-extralight">
+												<Icon
+													name={calendarIcon}
+													class="h-3 w-3 text-white"
+												/>
+												<FormattedDate
+													date={post.data.pubDate}
+												/>
+												{post.data.updatedDate && (
+													<div>
+														Last updated on{" "}
+														<FormattedDate
+															date={
+																post.data
+																	.updatedDate
+															}
+														/>
+													</div>
+												)}
+											</li>
+											<li class="flex flex-row items-center gap-2 text-sm font-extralight">
+												<Icon
+													name={hourglassICon}
+													class="h-3 w-3 text-white"
+												/>
+												? Minutes time read
+											</li>
+										</ul>
+									</a>
 								</li>
 							);
 						})
