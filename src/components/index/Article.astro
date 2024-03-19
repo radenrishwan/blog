@@ -8,7 +8,8 @@ const eyeIcon = "eye";
 
 const posts = (await getCollection("blog"))
     .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
-    .reverse().slice(0, 4);
+    .reverse()
+    .slice(0, 4);
 
 const toElipsis = (text: string, max = 150) => {
     if (text.length > max) {
@@ -29,42 +30,56 @@ const toElipsis = (text: string, max = 150) => {
 <div class="grid grid-cols-4 gap-5">
     {
         posts.map((post) => (
-            <div class="flex flex-col gap-2 rounded-md bg-slate-950 p-4">
-                <Image
-                    src={
-                        post.data.heroImage == ""
-                            ? "https://placehold.co/800x600"
-                            : post.data.heroImage!
-                    }
-                    width={800}
-                    height={600}
-                    alt={post.data.title}
-                    class="rounded-md"
-                />
-                <p class="text-lg text-ellipsis">{toElipsis(post.data.title, 50)}</p>
-                <p class="text-md font-light text-ellipsis">{toElipsis(post.data.short)}</p>
-                <p class="text-end text-sm font-extralight">
-                    ? minutes time read
-                </p>
-                <div class="pt-5" />
-                <div class="text-md basis-1/2 rounded-md border-[2px] border-primary px-2 py-1 text-center">
-                    {/* TODO: IMPLEMENT LATER*/}
-                    <a
-                        href={post.slug}
-                        class="flex cursor-pointer flex-row items-center justify-center gap-2"
-                    >
-                        <Icon name={shareIcon} class="h-5 w-5 fill-primary" />
-                        Share
-                    </a>
+            <div class="flex flex-col justify-between gap-10 rounded-md bg-slate-950 p-4">
+                <div class="flex flex-col gap-2">
+                    <Image
+                        src={
+                            post.data.heroImage == ""
+                                ? "https://placehold.co/800x600"
+                                : post.data.heroImage!
+                        }
+                        width={1}
+                        height={1}
+                        alt={post.data.title}
+                        class="rounded-md w-full h-25 object-fill"
+                    />
+                    <div>
+                        <p class="text-lg text-ellipsis line-clamp-1">
+                            {post.data.title}
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-md font-light line-clamp-5">
+                            {post.data.short}
+                        </p>
+                    </div>
                 </div>
-                <div class="text-md basis-1/2 rounded-md bg-primary px-2 py-1 text-center text-black">
-                    <a
-                        href={"articles/" + post.slug}
-                        class="flex flex-row items-center justify-center gap-2 text-white"
-                    >
-                        <Icon name={eyeIcon} class="h-5 w-5 fill-white" />
-                        Read More
-                    </a>
+                <div class="flex flex-col gap-2">
+                    <p class="text-end text-sm font-extralight">
+                        ? minutes time read
+                    </p>
+                    <div class="text-md basis-1/2 rounded-md border-[2px] border-primary px-2 py-1 text-center">
+                        {/* TODO: IMPLEMENT LATER*/}
+                        <a
+                            href={post.slug}
+                            class="flex cursor-pointer flex-row items-center justify-center gap-2"
+                        >
+                            <Icon
+                                name={shareIcon}
+                                class="h-5 w-5 fill-primary"
+                            />
+                            Share
+                        </a>
+                    </div>
+                    <div class="text-md basis-1/2 rounded-md bg-primary px-2 py-1 text-center text-black">
+                        <a
+                            href={"articles/" + post.slug}
+                            class="flex flex-row items-center justify-center gap-2 text-white"
+                        >
+                            <Icon name={eyeIcon} class="h-5 w-5 fill-white" />
+                            Read More
+                        </a>
+                    </div>
                 </div>
             </div>
         ))
