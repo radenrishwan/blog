@@ -1,8 +1,22 @@
 ---
 import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+import Image from "astro/components/Image.astro";
 
 const shareIcon = "link";
 const eyeIcon = "eye";
+
+const posts = (await getCollection("blog"))
+    .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+    .slice(0, 4);
+
+const toElipsis = (text: string, max = 150) => {
+    if (text.length > max) {
+        return `${text.slice(0, max)}...`;
+    } else {
+        return text;
+    }
+};
 ---
 
 <p
@@ -14,37 +28,43 @@ const eyeIcon = "eye";
 </p>
 <div class="grid grid-cols-4 gap-5">
     {
-        [0, 1, 2, 3].map(() => (
+        posts.map((post) => (
             <div class="flex flex-col gap-2 rounded-md bg-slate-950 p-4">
-                <img
-                    src="https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg"
+                <Image
+                    src={
+                        post.data.heroImage == ""
+                            ? "https://placehold.co/800x600"
+                            : post.data.heroImage!
+                    }
                     width={800}
                     height={600}
-                    alt="A lovely bath"
+                    alt={post.data.title}
                     class="rounded-md"
                 />
-                <p class="text-xl">Otakudesu</p>
-                <p class="text-md font-light">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Architecto, accusantium ducimus voluptatem sapiente omnis
-                    veniam nemo quasi rerum sunt voluptate? Voluptatum nulla
-                    corrupti similique?
-                </p>
+                <p class="text-lg text-ellipsis">{toElipsis(post.data.title, 50)}</p>
+                <p class="text-md font-light text-ellipsis">{toElipsis(post.data.short)}</p>
                 <p class="text-end text-sm font-extralight">
-                    3 minutes time read
+                    ? minutes time read
                 </p>
-                <div class="pt-10" />
+                <div class="pt-5" />
                 <div class="text-md basis-1/2 rounded-md border-[2px] border-primary px-2 py-1 text-center">
-                    <p class="flex cursor-pointer flex-row items-center justify-center gap-2">
+                    {/* TODO: IMPLEMENT LATER*/}
+                    <a
+                        href={post.slug}
+                        class="flex cursor-pointer flex-row items-center justify-center gap-2"
+                    >
                         <Icon name={shareIcon} class="h-5 w-5 fill-primary" />
                         Share
-                    </p>
+                    </a>
                 </div>
                 <div class="text-md basis-1/2 rounded-md bg-primary px-2 py-1 text-center text-black">
-                    <p class="flex cursor-pointer flex-row items-center justify-center gap-2 text-white">
+                    <a
+                        href={"articles/" + post.slug}
+                        class="flex flex-row items-center justify-center gap-2 text-white"
+                    >
                         <Icon name={eyeIcon} class="h-5 w-5 fill-white" />
                         Read More
-                    </p>
+                    </a>
                 </div>
             </div>
         ))
