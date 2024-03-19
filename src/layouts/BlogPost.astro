@@ -8,7 +8,8 @@ import { Icon } from "astro-icon/components";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, author } =
+	Astro.props;
 
 const calendarIcon = "calendar";
 const hourglassIcon = "hourglass";
@@ -47,8 +48,8 @@ const liClass = "flex flex-row items-center gap-2 text-sm font-extralight";
 					</li>
 				</ul>
 				<p class={liClass}>
-					<Icon name={atIcon} class="h-3 w-3 fill-white" /> Raden Mohamad
-					Rishwan
+					<Icon name={atIcon} class="h-3 w-3 fill-white" />
+					{author ?? "Unknown"}
 				</p>
 				{
 					heroImage && (
@@ -61,7 +62,11 @@ const liClass = "flex flex-row items-center gap-2 text-sm font-extralight";
 						/>
 					)
 				}
-				<slot class="prose" />
+				<div
+					class="prose dark:prose-invert prose-a:text-primary prose-p:text-justify prose-img:rounded-md prose-headings:underline max-w-none"
+				>
+					<slot />
+				</div>
 				<div class="flex flex-wrap gap-2">
 					{
 						[0, 1, 2, 3].map(() => (
