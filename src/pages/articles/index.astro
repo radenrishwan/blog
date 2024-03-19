@@ -11,9 +11,9 @@ import FormattedDate from "../../components/FormattedDate.astro";
 const calendarIcon = "calendar";
 const hourglassICon = "hourglass";
 
-const posts = (await getCollection("blog")).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
-).reverse();
+const posts = (await getCollection("blog"))
+	.sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+	.reverse();
 
 const toElipsis = (text: string) => {
 	if (text.length > 600) {
@@ -36,7 +36,7 @@ const toElipsis = (text: string) => {
 				id="articles"
 				class="'container flex mx-auto items-center justify-center gap-10 py-10"
 			>
-				<ul class="flex flex-col justify-center gap-5 w-[65vw] ">
+				<ul class="flex flex-col justify-center gap-5 w-[65vw]">
 					{
 						posts.map((post, index) => {
 							if (index == 0) {
@@ -52,24 +52,32 @@ const toElipsis = (text: string) => {
 										<p class="text-2xl font-semibold">
 											{post.data.title}
 										</p>
-										<Image
-											src={
-												post.data.heroImage == ""
-													? "https://placehold.co/600x400"
-													: post.data.heroImage!
-											}
-											height={1}
-											width={1}
-											loading="lazy"
-											class="h-auto w-full rounded-md"
-											alt={post.data.title}
-										/>
+										{post.data.heroImage != "" ? (
+											<Image
+												src={
+													post.data.heroImage == ""
+														? "https://placehold.co/600x400"
+														: post.data.heroImage!
+												}
+												height={1}
+												width={1}
+												loading="lazy"
+												class="h-auto w-full rounded-md"
+												alt={post.data.title}
+											/>
+										) : (
+											<> </>
+										)}
 										<div class="flex flex-wrap gap-2">
-											{(post.data.tags ?? []).map((tag: string) => (
-												<div class="text-sm font-extralight text-gray-300 ">
-													<p class="text-md">#{tag}</p>
-												</div>
-											))}
+											{(post.data.tags ?? []).map(
+												(tag: string) => (
+													<div class="text-sm font-extralight text-gray-300 ">
+														<p class="text-md">
+															#{tag}
+														</p>
+													</div>
+												),
+											)}
 										</div>
 										<p>
 											{toElipsis(post.data.short)}
