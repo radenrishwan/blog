@@ -65,7 +65,7 @@ const toElipsis = (text: string) => {
 											alt={post.data.title}
 										/>
 										<div class="flex flex-wrap gap-2">
-											{(post.data.tags ?? []).map((tag) => (
+											{(post.data.tags ?? []).map((tag: string) => (
 												<div class="text-sm font-extralight text-gray-300 ">
 													<p class="text-md">#{tag}</p>
 												</div>
