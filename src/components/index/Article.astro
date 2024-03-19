@@ -1,0 +1,52 @@
+---
+import { Icon } from "astro-icon/components";
+
+const shareIcon = "link";
+const eyeIcon = "eye";
+---
+
+<p
+    class="mb-5 flex flex-row gap-2 border-l-4 border-primary pl-4 text-2xl font-semibold"
+    id="title"
+>
+    I wrote my journey here
+    <span class="text-gray-500" id="hastag"> # </span>
+</p>
+<div class="grid grid-cols-4 gap-5">
+    {
+        [0, 1, 2, 3].map(() => (
+            <div class="flex flex-col gap-2 rounded-md bg-slate-950 p-4">
+                <img
+                    src="https://cdn.shopify.com/static/sample-images/bath_grande_crop_center.jpeg"
+                    width={800}
+                    height={600}
+                    alt="A lovely bath"
+                    class="rounded-md"
+                />
+                <p class="text-xl">Otakudesu</p>
+                <p class="text-md font-light">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Architecto, accusantium ducimus voluptatem sapiente omnis
+                    veniam nemo quasi rerum sunt voluptate? Voluptatum nulla
+                    corrupti similique?
+                </p>
+                <p class="text-end text-sm font-extralight">
+                    3 minutes time read
+                </p>
+                <div class="pt-10" />
+                <div class="text-md basis-1/2 rounded-md border-[2px] border-primary px-2 py-1 text-center">
+                    <p class="flex cursor-pointer flex-row items-center justify-center gap-2">
+                        <Icon name={shareIcon} class="h-5 w-5 fill-primary" />
+                        Share
+                    </p>
+                </div>
+                <div class="text-md basis-1/2 rounded-md bg-primary px-2 py-1 text-center text-black">
+                    <p class="flex cursor-pointer flex-row items-center justify-center gap-2 text-white">
+                        <Icon name={eyeIcon} class="h-5 w-5 fill-white" />
+                        Read More
+                    </p>
+                </div>
+            </div>
+        ))
+    }
+</div>

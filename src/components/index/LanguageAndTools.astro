@@ -1,0 +1,64 @@
+---
+import { Icon } from "astro-icon/components";
+
+const languageTools = [
+    {
+        icon: "rust",
+        name: "Rust (currently learning)",
+    },
+    {
+        icon: "go",
+        name: "Golang",
+    },
+    {
+        icon: "javascript",
+        name: "Javascript",
+    },
+    {
+        icon: "docker",
+        name: "Docker",
+    },
+    {
+        icon: "postgres",
+        name: "Postgres",
+    },
+    {
+        icon: "dart",
+        name: "Dart",
+    },
+    {
+        icon: "kotlin",
+        name: "Kotlin",
+    },
+    {
+        icon: "gcp",
+        name: "Google Cloud Platform",
+    },
+];
+---
+
+<div class="container mx-auto px-14">
+    <p
+        class="mb-5 flex flex-row gap-2 border-l-4 border-primary pl-4 text-2xl font-semibold"
+        id="title"
+    >
+        Language and Tools
+        <span class="text-gray-500" id="hastag"> # </span>
+    </p>
+    <div class="mt-5 grid grid-cols-4 gap-5">
+        {
+            languageTools.map((item, index) => (
+                <>
+                    <div
+                        class="flex flex-row items-center gap-2 rounded-md border-[2px] border-primary p-2 text-primary hover:bg-primary hover:text-white"
+                    >
+                        <Icon name={item.icon} class="h-5 w-5 fill-primary hover:fill-white" />
+                        <p class="text-md">{item.name}</p>
+                    </div>
+                </>
+            ))
+        }
+    </div>
+</div>
+
+

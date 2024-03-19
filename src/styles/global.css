@@ -1,0 +1,23 @@
+ @tailwind base;
+ @tailwind components;
+ @tailwind utilities;
+ 
+ body {
+   @apply bg-slate-900 text-white;
+ }
+ 
+ nav {
+   @apply bg-slate-950;
+ }
+ 
+ #hastag {
+   @apply hidden;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   user-select: none;
+ }
+ 
+ #title:hover #hastag {
+   @apply block;
+ }
+ 

@@ -1,0 +1,80 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+const calendarIcon = "calendar";
+const hourglassICon = "hourglass";
+
+const posts = (await getCollection("blog")).sort(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section
+				id="articles"
+				class="'container mx-auto flex flex-row items-center gap-10 px-[20vw] py-10"
+			>
+				<ul class="flex flex-col justify-center gap-5">
+					{
+						posts.map((post, index) => {
+							if (index == 0) {
+								console.log(post.frontmatter);
+								
+							}
+							
+							return (
+								<li class="flex cursor-pointer flex-col gap-5">
+									<p class="text-2xl font-semibold">
+										{post.data.title}
+									</p>
+									<Image
+										src={post.data.heroImage}
+										height={1}
+										width={1}
+										loading="lazy"
+										class="h-auto w-full object-cover rounded-md"
+										alt={post.data.title}
+									/>
+									<p>
+										{post.data.short}
+										<span class="underline">Read more</span>
+									</p>
+									<ul class="flex flex-row gap-4">
+										<li class="flex flex-row items-center gap-2 text-sm font-extralight">
+											<Icon
+												name={calendarIcon}
+												class="h-3 w-3 text-white"
+											/>
+											08 Jul 2023
+										</li>
+										<li class="flex flex-row items-center gap-2 text-sm font-extralight">
+											<Icon
+												name={hourglassICon}
+												class="h-3 w-3 text-white"
+											/>
+											3 Minutes time read
+										</li>
+									</ul>
+								</li>
+							);
+						})
+					}
+				</ul>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
