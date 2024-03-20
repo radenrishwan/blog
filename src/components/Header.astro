@@ -5,35 +5,39 @@ import logo from "../../public/assets/logo.png";
 ---
 
 <nav id="navbar">
-	<div
-		class="container mx-auto flex flex-row items-center justify-between px-14 py-4"
-	>
-		<div id="logo" class="flex flex-row items-center gap-2">
-			<a href="/" class="text-xl hover:text-primary">
-				<Image src={logo} format="png" alt="logo" loading="eager"  class="w-10"/>
-			</a>
-			<a href="/" class="text-xl hover:text-primary">
-				Raden Mohamad Rishwan
-			</a>
-		</div>
-		<ul class="flex gap-4">
-			<li>
-				<a class="hover:text-primary" href="/"> Home </a>
-			</li>
-			<li>
-				<a class="hover:text-primary" href="/articles"> Articles </a>
-			</li>
-			<li>
-				<a class="hover:text-primary" href="/#project"> Project </a>
-			</li>
-			<li>
-				<a
-					href="mailto:radenrishwan@gmail.com"
-					class="rounded-md border-[2px] border-primary p-2 text-primary hover:bg-primary hover:text-white"
-				>
-					Contact
-				</a>
-			</li>
-		</ul>
-	</div>
+  <div
+    class="container mx-auto flex gap-3 lg:gap-0 lg:flex-row items-center justify-between px-14 py-4 flex-col"
+  >
+    <div id="logo" class="flex flex-row items-center gap-2">
+      <a href="/" class="text-xl hover:text-primary">
+        <Image
+          src={logo}
+          format="png"
+          alt="logo"
+          loading="eager"
+          class="w-10"
+        />
+      </a>
+      <a href="/" class="text-xl hover:text-primary"> Raden Mohamad Rishwan </a>
+    </div>
+    <ul class="flex gap-4">
+      <li>
+        <a class="hover:text-primary" href="/"> Home </a>
+      </li>
+      <li>
+        <a class="hover:text-primary" href="/articles"> Articles </a>
+      </li>
+      <li>
+        <a class="hover:text-primary" href="/#project"> Project </a>
+      </li>
+      <li class="">
+        <a
+          href="mailto:radenrishwan@gmail.com"
+          class="lg:rounded-md lg:border-[2px] lg:border-primary lg:p-2 lg:text-primary lg:hover:bg-primary lg:hover:text-white hover:text-primary"
+        >
+          Contact
+        </a>
+      </li>
+    </ul>
+  </div>
 </nav>
