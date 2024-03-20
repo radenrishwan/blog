@@ -18,95 +18,93 @@ const eyeIcon = "eye";
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section
-				id="hero"
-				class="container mx-auto flex flex-row items-center gap-10 px-14 py-10"
-			>
-				<div class="flex basis-2/3 flex-col">
-					<div class="flex flex-col gap-5">
-						<p>Hi, it's me</p>
-						<p class="text-3xl text-primary">
-							Raden Mohamad Rishwan
-						</p>
-						<p class="text-6xl">
-							I'm a <span class="text-primary">Web</span> &{" "}
-							<span class="text-primary">Mobile Developer</span> and
-							currently learning <span class="text-primary"
-								>System Programming</span
-							>
-						</p>
-					</div>
-					<div class="mt-10 flex flex-row gap-2">
-						<a
-							href="mailto:radenrishwan@gmail.com"
-							class="flex content-center items-center justify-center gap-2 rounded-md bg-primary px-4 py-2"
-						>
-							<Icon
-								name={arrowRightUpIcon}
-								class="h-5 w-5 text-white"
-							/>
-							Contact Me
-						</a>
-						<a
-							href="/articles"
-							class="flex items-center gap-2 rounded-md border-[2px] border-primary p-2 text-primary hover:bg-primary hover:text-white"
-						>
-							<Icon name={eyeIcon} class="h-5 w-5 text-primary" />
-							Check Out My Article
-						</a>
-					</div>
-				</div>
-				<div>
-					<Image src={logo} format="png" alt="logo" loading="eager" />
-					{/* TODO: add text later */}
-					<p class="text-center text-lg"></p>
-				</div>
-			</section>
-			<section id="languagentools" class="bg-slate-950 py-10">
-				<LanguageAndTools />
-			</section>
-			<section id="project" class="container mx-auto px-14 py-10">
-				<Project />
-			</section>
-			<section id="articles" class="container mx-auto px-14 py-10">
-				<Articles />
-			</section>
-			<section id="about" class="bg-slate-950">
-				<div class="container mx-auto px-14 py-10">
-					<p
-						class="mb-5 flex flex-row gap-2 border-l-4 border-primary pl-4 text-2xl font-semibold"
-						id="title"
-					>
-						About Me
-						<span class="text-gray-500" id="hastag"> # </span>
-					</p>
-					<p class="text-md line-clamp-6">
-						Hi there 👋 <br />
-						I'm just person who have passionate at technology.
-						<br />
-						I'm a student at Unsika. I'm currently learning mobile and
-						backend technology and mostly writing in golang, dart, kotlin,
-						and TS/JS. I also using GCP or AWS to deploy for my most
-						project.
-						<br />
-						<br />I like to document the activities of my cats and
-						the stray cats around me. You can check my collection
-						<span class="text-primary">
-							<a href="/">here</a>
-						</span>
-					</p>
-				</div>
-			</section>
-			<section id="gallery" class="container mx-auto px-14 py-10">
-				<Gallery />
-			</section>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section
+        id="hero"
+        class="container mx-auto flex flex-col lg:flex-row items-center gap-10 px-4 lg:px-14 py-10"
+      >
+        <div class="flex basis-2/3 flex-col">
+          <div class="flex flex-col gap-5">
+            <p>Hello, my name</p>
+            <p class="text-3xl text-primary">Raden Mohamad Rishwan</p>
+            <p class="text-3xl lg:text-6xl">
+              I'm a <span class="text-primary">Web</span> &{" "}
+              <span class="text-primary">Mobile Developer</span> and currently learning
+              <span class="text-primary">System Programming</span>
+            </p>
+          </div>
+          <div class="mt-10 flex flex-col-reverse lg:flex-row gap-2">
+            <a
+              href="mailto:radenrishwan@gmail.com"
+              class="flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2"
+            >
+              <Icon name={arrowRightUpIcon} class="h-5 w-5 text-white" />
+              Contact Me
+            </a>
+            <a
+              href="/articles"
+              class="flex items-center justify-center gap-2 rounded-md border-[2px] border-primary p-2 text-primary hover:bg-primary hover:text-white"
+            >
+              <Icon name={eyeIcon} class="h-5 w-5 text-primary" />
+              Check Out My Article
+            </a>
+          </div>
+        </div>
+        <div>
+          <Image
+            src={logo}
+            format="png"
+            alt="logo"
+            loading="eager"
+            class="hidden lg:block"
+          />
+          {/* TODO: add text later */}
+          <p class="text-center text-lg"></p>
+        </div>
+      </section>
+      <section id="languagentools" class="bg-slate-950 py-10">
+        <LanguageAndTools />
+      </section>
+      <section id="project" class="container mx-auto px-4 lg:px-14 py-10">
+        <Project />
+      </section>
+      <section id="articles" class="container mx-auto px-4 lg:px-14 py-10">
+        <Articles />
+      </section>
+      <section id="about" class="bg-slate-950">
+        <div class="container mx-auto px-4 lg:px-14 py-10">
+          <p
+            class="mb-5 flex flex-row gap-2 border-l-4 border-primary pl-4 text-2xl font-semibold"
+            id="title"
+          >
+            About Me
+            <span class="text-gray-500" id="hastag"> # </span>
+          </p>
+          <p class="text-md text-justify">
+            Hi there 👋 <br />
+            I'm just person who have passionate at technology.
+            <br />
+            I'm a student at Unsika. I'm currently learning mobile and backend technology
+            and mostly writing in golang, dart, kotlin, and TS/JS. I also using GCP
+            or AWS to deploy for my most project.
+            <br />
+            <br />I like to document the activities of my cats and the stray
+            cats around me. You can check my collection
+            <span class="text-primary">
+              <a href="/">here</a>
+            </span>
+          </p>
+        </div>
+      </section>
+      <section id="gallery" class="container mx-auto px-4 lg:px-14 py-10">
+        <Gallery />
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>
