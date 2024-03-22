@@ -11,7 +11,7 @@ export default defineConfig({
   image: {
     service: passthroughImageService()
   },
-  site: 'http://localhost:4321/',
+  site: 'https://mohamadrishwan.com/',
   integrations: [mdx(), sitemap(), tailwind(), icon()],
   output: "server",
   adapter: cloudflare()
