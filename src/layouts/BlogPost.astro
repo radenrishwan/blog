@@ -11,7 +11,7 @@ import Image from "astro/components/Image.astro";
 type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, pubDate, updatedDate, heroImage, author, tags } =
-	Astro.props;
+  Astro.props;
 
 const calendarIcon = "calendar";
 const hourglassIcon = "hourglass";
@@ -21,67 +21,75 @@ const liClass = "flex flex-row items-center gap-2 text-sm font-extralight";
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
-	<body>
-		<Header />
-		<main
-			class="container flex mx-auto items-center justify-center gap-10 py-10"
-		>
-			<article class="flex flex-col justify-center gap-5 w-[94vw] lg:w-[65vw]">
-				<p class="text-2xl font-semibold">{title}</p>
-				<ul class="flex flex-row gap-4">
-					<li class={liClass}>
-						<Icon name={calendarIcon} class="h-3 w-3 text-white" />
-						<FormattedDate date={pubDate} />
-						{
-							updatedDate && (
-								<div>
-									Last updated on{" "}
-									<FormattedDate date={updatedDate} />
-								</div>
-							)
-						}
-					</li>
-					<li class={liClass}>
-						<Icon name={hourglassIcon} class="h-3 w-3 fill-white" />
-						? Minutes time read
-					</li>
-				</ul>
-				<p class={liClass}>
-					<Icon name={atIcon} class="h-3 w-3 fill-white" />
-					{author ?? "Unknown"}
-				</p>
-				{
-					heroImage && (
-						<Image
-							width={1}
-							height={1}
-							src={
-								heroImage == ""
-									? "https://placehold.co/600x400"
-									: heroImage!
-							}
-							alt={title}
-							class="h-auto w-full object-cover rounded-md"
-						/>
-					)
-				}
-				<Prose>
-					<slot />
-				</Prose>
-				<div class="flex flex-wrap gap-2">
-					{
-						(tags ?? []).map((tag: string) => (
-							<div class="text-sm font-extralight text-gray-300">
-								<p class="text-md">#{tag}</p>
-							</div>
-						))
-					}
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <Header />
+    <main
+      class="container flex mx-auto items-center justify-center gap-10 py-10"
+    >
+      <article class="flex flex-col justify-center gap-5 w-[94vw] lg:w-[65vw]">
+        <p class="text-2xl font-semibold">{title}</p>
+        <ul class="flex flex-row gap-4">
+          <li class={liClass}>
+            <Icon name={calendarIcon} class="h-3 w-3 text-white" />
+            <FormattedDate date={pubDate} />
+            {
+              updatedDate && (
+                <div>
+                  Last updated on <FormattedDate date={updatedDate} />
+                </div>
+              )
+            }
+          </li>
+          <li class={liClass}>
+            <Icon name={hourglassIcon} class="h-3 w-3 fill-white" />
+            ? Minutes time read
+          </li>
+        </ul>
+        <p class={liClass}>
+          <Icon name={atIcon} class="h-3 w-3 fill-white" />
+          {author ?? "Unknown"}
+        </p>
+        {
+          heroImage && (
+            <Image
+              width={1}
+              height={1}
+              src={
+                heroImage == "" ? "https://placehold.co/600x400" : heroImage!
+              }
+              alt={title}
+              class="h-auto w-full object-cover rounded-md"
+            />
+          )
+        }
+        <Prose>
+          <slot />
+        </Prose>
+        <div class="flex flex-wrap gap-2">
+          {
+            (tags ?? []).map((tag: string) => (
+              <div class="text-sm font-extralight text-gray-300">
+                <p class="text-md">#{tag}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- utteranc.es script -->
+        <script
+          is:inline
+          src="https://utteranc.es/client.js"
+          repo="radenrishwan/blog"
+          issue-term="pathname"
+          label="comment"
+          theme="github-dark"
+          crossorigin="anonymous"
+          async></script>
+      </article>
+    </main>
+    <Footer />
+  </body>
 </html>

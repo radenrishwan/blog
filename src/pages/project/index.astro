@@ -1,0 +1,85 @@
+---
+import { toCodes } from "astro:i18n";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import Card from "../../components/Project/Card.astro";
+import { SITE_TITLE, SITE_DESCRIPTION, projects } from "../../consts";
+
+export type Project = {
+  title: string;
+  description: string;
+  technologies: string[];
+  repositories: string;
+  url: string;
+};
+
+const api = "https://api.github.com/users/radenrishwan/repos";
+const token = process.env.TOKEN;
+const anotherProject: Project[] = [];
+
+await fetch(api, {
+  headers: {
+    Authorization: `token ${token}`,
+  },
+})
+  .then((res) => res.json())
+  .then((data) => {
+    data.map((repo: any) => {
+      anotherProject.push({
+        title: repo.name,
+        description: repo.description,
+        technologies: [repo.language],
+        repositories: repo.html_url,
+        url: repo.html_url,
+      });
+    });
+  });
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main
+      class="container mx-auto flex flex-col items-center gap-10 px-4 lg:px-14 py-10"
+    >
+      <section id="project">
+        <p
+          class="mb-5 flex flex-row gap-2 border-l-4 border-primary pl-4 text-2xl font-semibold"
+          id="title"
+        >
+          Project that i work on
+          <span class="text-gray-500" id="hastag"> # </span>
+        </p>
+        <div class="lg:grid lg:grid-cols-4 flex flex-col gap-5">
+          {
+            projects.map((project) => (
+              <Card {...project} with_technologies={true} />
+            ))
+          }
+        </div>
+      </section>
+      <section id="github">
+        <p
+          class="mb-5 flex flex-row gap-2 border-l-4 border-primary pl-4 text-2xl font-semibold"
+          id="title"
+        >
+          Another project
+          <span class="text-gray-500" id="hastag"> # </span>
+        </p>
+        <div class="lg:grid lg:grid-cols-4 flex flex-col gap-5">
+          {
+            anotherProject.map((project) => (
+              <Card {...project} with_technologies={false} />
+            ))
+          }
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
