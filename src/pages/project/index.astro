@@ -15,7 +15,7 @@ export type Project = {
 };
 
 const api = "https://api.github.com/users/radenrishwan/repos";
-const token = process.env.TOKEN;
+const token = import.meta.env.TOKEN;
 const anotherProject: Project[] = [];
 
 await fetch(api, {
